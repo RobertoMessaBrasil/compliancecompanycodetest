@@ -1,4 +1,4 @@
-package com.robertomessa.codetest.compliancecompany.productmanager;
+package com.robertomessabrasil.codetest.compliancecompany.productmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

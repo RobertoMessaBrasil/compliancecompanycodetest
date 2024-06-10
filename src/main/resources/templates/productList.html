@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{styles.css}">
+    <link rel="stylesheet" th:href="@{styles.css}">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
         <th>Category</th>
         <th>&nbsp;</th>
         </thead>
-        <tr th:each="product : ${products}">
+        <tr th:each="product, stats : ${products}">
             <td><a href="#" th:href="@{'/editProduct/' + ${product.id}}"><span th:text="${product.name}"></span></a>
             </td>
             <td th:text="${product.price}"></td>
@@ -33,11 +33,18 @@
             <td><a href="#" th:href="@{'/deleteConfirm/' + ${product.id}}">Delete</a></td>
         </tr>
     </table>
+    <table>
+        <tr>
+            <td style="padding:5px" th:each="index: ${indexes}"><a href="#" th:href="@{'/' + ${index}}" th:text="${index}"></a></td>
+        </tr>
+    </table>
 </div>
 
 <div class="alert alert-danger" th:if="${#lists.isEmpty(products)}">
     <p>No Products.</p>
 </div>
+
+<hr>
 
 <p><a href="/addProduct">New Product</a></p>
 

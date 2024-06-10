@@ -1,14 +1,16 @@
-package com.robertomessa.codetest.compliancecompany.productmanager.service;
+package com.robertomessabrasil.codetest.compliancecompany.productmanager.service;
 
-import com.robertomessa.codetest.compliancecompany.productmanager.dto.CategoryOutput;
-import com.robertomessa.codetest.compliancecompany.productmanager.dto.ProductInput;
-import com.robertomessa.codetest.compliancecompany.productmanager.dto.ProductOutput;
-import com.robertomessa.codetest.compliancecompany.productmanager.model.CategoryEntity;
-import com.robertomessa.codetest.compliancecompany.productmanager.model.ProductEntity;
-import com.robertomessa.codetest.compliancecompany.productmanager.model.repository.CategoryRepository;
-import com.robertomessa.codetest.compliancecompany.productmanager.model.repository.ProductRepository;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.dto.CategoryOutput;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.dto.ProductInput;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.dto.ProductOutput;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.model.CategoryEntity;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.model.ProductEntity;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.model.repository.CategoryRepository;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.model.repository.ProductRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,14 +18,16 @@ import java.util.*;
 @Service
 public class ProductService {
 
+    public static final int PAGE_SIZE = 2;
+
     @Autowired
     ProductRepository productRepository;
 
     @Autowired
     CategoryRepository categoryRepository;
 
-    public List<ProductOutput> findAll() {
-        List<ProductEntity> productEntities = this.productRepository.findAll();
+    public List<ProductOutput> findAll(int index) {
+        Page<ProductEntity> productEntities = this.productRepository.findAll(PageRequest.of(index, PAGE_SIZE));
         List<ProductOutput> productOutputs = new ArrayList<>();
         for (ProductEntity product : productEntities) {
 
@@ -138,5 +142,14 @@ public class ProductService {
 
         return categoryOutputs;
 
+    }
+
+    public List<Integer> getIndexes() {
+        long pageCount = (this.productRepository.count() / PAGE_SIZE) + 1;
+        List<Integer> index = new ArrayList<>();
+        for (int i0 = 0; i0 < pageCount; i0++) {
+            index.add(i0);
+        }
+        return index;
     }
 }

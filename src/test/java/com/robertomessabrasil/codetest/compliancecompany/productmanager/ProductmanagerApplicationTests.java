@@ -1,4 +1,4 @@
-package com.robertomessa.codetest.compliancecompany.productmanager;
+package com.robertomessabrasil.codetest.compliancecompany.productmanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

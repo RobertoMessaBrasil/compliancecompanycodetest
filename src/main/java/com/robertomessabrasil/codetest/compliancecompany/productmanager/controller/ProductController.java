@@ -1,10 +1,9 @@
-package com.robertomessa.codetest.compliancecompany.productmanager.controller;
+package com.robertomessabrasil.codetest.compliancecompany.productmanager.controller;
 
-import com.robertomessa.codetest.compliancecompany.productmanager.dto.CategoryOutput;
-import com.robertomessa.codetest.compliancecompany.productmanager.dto.ProductInput;
-import com.robertomessa.codetest.compliancecompany.productmanager.dto.ProductOutput;
-import com.robertomessa.codetest.compliancecompany.productmanager.model.ProductEntity;
-import com.robertomessa.codetest.compliancecompany.productmanager.service.ProductService;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.dto.CategoryOutput;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.dto.ProductInput;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.dto.ProductOutput;
+import com.robertomessabrasil.codetest.compliancecompany.productmanager.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,11 +25,20 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String listProducts(Model model) {
-        List<ProductOutput> productList = this.productService.findAll();
-        if (productList != null) {
-            model.addAttribute("products", productList);
-        }
+    public String listProducts() {
+        return "redirect:/0";
+    }
+
+    @RequestMapping(value = "/{pageIndex}", method = RequestMethod.GET)
+    public String listProducts(@PathVariable Optional<Integer> pageIndex, Model model) {
+
+        int index = pageIndex.orElse(0);
+
+        List<ProductOutput> productList = this.productService.findAll(index);
+
+        model.addAttribute("products", productList);
+        model.addAttribute("indexes", this.productService.getIndexes());
+
         return "productList";
     }
 

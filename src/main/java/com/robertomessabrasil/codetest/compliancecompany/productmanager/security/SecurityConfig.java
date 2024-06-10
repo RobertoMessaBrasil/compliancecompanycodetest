@@ -16,6 +16,7 @@
 //
 //        httpSecurity
 //                .authorizeHttpRequests()
+//.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 //                .anyRequest()
 //                .authenticated();
 //

@@ -1,4 +1,4 @@
-package com.robertomessa.codetest.compliancecompany.productmanager.model;
+package com.robertomessabrasil.codetest.compliancecompany.productmanager.model;
 
 import jakarta.persistence.*;
 

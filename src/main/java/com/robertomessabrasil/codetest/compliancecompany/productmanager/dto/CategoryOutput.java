@@ -1,4 +1,4 @@
-package com.robertomessa.codetest.compliancecompany.productmanager.dto;
+package com.robertomessabrasil.codetest.compliancecompany.productmanager.dto;
 
 public class CategoryOutput {
 
