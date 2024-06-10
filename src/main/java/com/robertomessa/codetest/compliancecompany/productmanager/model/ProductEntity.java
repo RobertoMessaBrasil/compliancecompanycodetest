@@ -1,6 +1,9 @@
 package com.robertomessa.codetest.compliancecompany.productmanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -13,17 +16,20 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty
+    @Size(min = 5, max = 20)
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
+    @Positive
     @Column(name = "price", nullable = false)
     private float price;
 
     @Column(name = "available", nullable = false)
     private String available;
+
+    @Column(name = "description")
+    private String description;
 
     @ManyToMany
     @JoinTable(
@@ -74,5 +80,13 @@ public class ProductEntity {
 
     public void setAvailable(String available) {
         this.available = available;
+    }
+
+    public Set<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryEntity> categories) {
+        this.categories = categories;
     }
 }

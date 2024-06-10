@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Product List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{styles.css}">
+</head>
+<body>
+
+<a href="/">Home</a>
+
+<hr/>
+
+<div class="container">
+
+    <a href="/">Cancel</a>
+
+    <div class="alert alert-danger" th:if="${#fields.hasErrors('product.name')}">
+        Name must be an alphanumeric between 5 and 20 characters long.
+    </div>
+
+    <div class="alert alert-danger" th:if="${#fields.hasErrors('product.price')}">
+        Price must be a positive number.
+    </div>
+
+    <h3>New Product:</h3>
+    <form action="#" th:action="@{/addProduct}" method="POST">
+        <table class="table">
+            <tr>
+                <th><label for="name">Name:</label></th>
+                <td><input id="name" type="text" name="name" size="50"></input></td>
+            </tr>
+            <tr>
+                <th><label for="price">Price:</label></th>
+                <td><input id="price" type="text" name="price" size="15"></td>
+            </tr>
+            <tr>
+                <th>Available:</th>
+                <td>
+                    <input type="radio" name="available" value="T">Yes</input>
+                    <input type="radio" name="available" value="F" checked="checked">No</input></td>
+            </tr>
+            <tr>
+                <th><label for="description">Description:</label></th>
+                <td><textarea id="description" name="description" cols="80" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <th>Categories:</th>
+                <td>
+                    <table>
+                        <tr th:each="category, stats: ${categories}">
+                            <td><input type="radio" name="categoryId" th:value="${category.id}"
+                                       th:checked="${stats.first}">&nbsp;<span
+                                    th:text="${category.name}"></span></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" class="btn btn-danger"></td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+</body>
+</html>

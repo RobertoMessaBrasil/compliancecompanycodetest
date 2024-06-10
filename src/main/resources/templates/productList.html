@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{styles.css}">
+</head>
+<body>
+
+<h2>Product List</h2>
+<div th:unless="${#lists.isEmpty(products)}">
+    <table class="table table-bordered">
+        <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Available</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>&nbsp;</th>
+        </thead>
+        <tr th:each="product : ${products}">
+            <td><a href="#" th:href="@{'/editProduct/' + ${product.id}}"><span th:text="${product.name}"></span></a>
+            </td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.available} == 'T' ? 'Yes' : 'No'"></td>
+            <td>
+                <span th:unless="${product.description} == null" th:text="${product.description}"></span>
+                <span th:if="${product.description} == null">No description</span></td>
+            <td><span th:each="category: ${product.categories}"><span th:text="${category.name}"></span> </span></td>
+            <td><a href="#" th:href="@{'/deleteConfirm/' + ${product.id}}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="alert alert-danger" th:if="${#lists.isEmpty(products)}">
+    <p>No Products.</p>
+</div>
+
+<p><a href="/addProduct">New Product</a></p>
+
+</body>
+</html>

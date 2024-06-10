@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{styles.css}">
+</head>
+<body>
+
+<a href="/">Home</a>
+
+<hr/>
+
+<h3>Confirm delete</h3>
+
+<div class="alert alert-danger">
+    Do you really want to delete this product?
+</div>
+
+<div class="alert alert-danger" th:if="${error} != null">
+    Product not found.
+</div>
+
+<div>
+    <a href="/">No</a>&nbsp;<a style="color:red;" href="#" th:href="@{'/deleteProduct/' + ${productId}}">Yes</a>
+</div>
+
+</body>
+</html>
