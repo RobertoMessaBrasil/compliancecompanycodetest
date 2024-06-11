@@ -35,7 +35,7 @@
     </table>
     <table>
         <tr>
-            <td style="padding:5px" th:each="index: ${indexes}"><a href="#" th:href="@{'/' + ${index}}" th:text="${index}"></a></td>
+            <td style="padding:5px" th:each="index: ${indexes}"><a href="#" th:href="@{'/listProducts/' + ${index}}" th:text="${index}"></a></td>
         </tr>
     </table>
 </div>

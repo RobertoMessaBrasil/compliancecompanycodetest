@@ -18,18 +18,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String listProducts() {
-        return "redirect:/0";
+        return "redirect:/listProducts/0";
     }
 
-    @RequestMapping(value = "/{pageIndex}", method = RequestMethod.GET)
+    @RequestMapping(value = "/listProducts/{pageIndex}", method = RequestMethod.GET)
     public String listProducts(@PathVariable Optional<Integer> pageIndex, Model model) {
 
         int index = pageIndex.orElse(0);
@@ -42,7 +42,7 @@ public class ProductController {
         return "productList";
     }
 
-    @RequestMapping(value = "editProduct/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/editProduct/{productId}", method = RequestMethod.GET)
     public String editProduct(@PathVariable Long productId, Model model) {
 
         Optional<ProductOutput> productEntity = this.productService.findById(productId);
@@ -60,7 +60,7 @@ public class ProductController {
         return "editProduct";
     }
 
-    @RequestMapping(value = "updateProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
     public String updateProduct(@Valid @ModelAttribute("product") ProductInput product, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -72,7 +72,7 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "addProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/addProduct", method = RequestMethod.GET)
     public String newProduct(Model model) {
 
         List<CategoryOutput> categoryOutputs = this.productService.findAllCategories();
@@ -83,7 +83,7 @@ public class ProductController {
         return "newProduct";
     }
 
-    @RequestMapping(value = "addProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public String addProduct(@Valid @ModelAttribute("product") ProductInput product, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
@@ -100,13 +100,13 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "deleteConfirm/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteConfirm/{productId}", method = RequestMethod.GET)
     public String deleteConfirm(@PathVariable Long productId, Model model) {
         model.addAttribute("productId", productId);
         return "deleteConfirm";
     }
 
-    @RequestMapping(value = "deleteProduct/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteProduct/{productId}", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable("productId") Long productId, Model model) {
 
         Optional<ProductOutput> productEntity = this.productService.findById(productId);
