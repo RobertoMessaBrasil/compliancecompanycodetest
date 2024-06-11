@@ -9,4 +9,4 @@ Work under progress...
 2. use databaseschema.sql to create the tables in you mysql database
 3. change application.properties to your mysql data connection
 4. maven clean pack in pom.xml folder
-5. open http://localhhost:8080
+5. open http://localhost:8080
