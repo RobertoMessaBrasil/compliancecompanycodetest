@@ -5,6 +5,9 @@ This is a technical test work for a Fullstack job selection process for an europ
 This repository is been updated to store the code for an Spring MVC CRUD application with Spring Security and Spring Data based on a Mysql database.
 
 Work under progress...
+1. Add sorting/filtering
+2. Add spring security
+3. create docker image
 
 ## Installation
 1. git clone this repository
