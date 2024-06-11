@@ -11,5 +11,6 @@ Work under progress...
 2. use databaseschema.sql to create the tables in you mysql database
 3. add some categories to the category table
 4. change application.properties to your mysql data connection
-5. maven clean pack in pom.xml folder
-6. open http://localhost:8080
+5. mvn clean pack in pom.xml folder
+6. mvn spring-boot:run
+7. open http://localhost:8080
